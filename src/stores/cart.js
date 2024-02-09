@@ -4,6 +4,7 @@ export default createStore({
   state: {
     counter: 0,
     cart: [],
+    auth: "true",
   },
   mutations: {
     increment(state, payload) {
