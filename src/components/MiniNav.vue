@@ -2,8 +2,22 @@
   <div class="contain bg-black text-white px-10">
     <h1>welcome to the dark side of the moon</h1>
     <nav class="space-x-10">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/login">Login</RouterLink>
+      <RouterLink v-if="$store.state.auth === 'false'" to="/login"
+        >Login</RouterLink
+      >
+      <RouterLink v-if="$store.state.auth === 'true'" to="/login"
+        >Add Products</RouterLink
+      >
+      <RouterLink v-if="$store.state.auth === 'true'" to="/login"
+        >Delete Products</RouterLink
+      >
+      <button
+        v-if="$store.state.auth === 'true'"
+        @click="$store.state.auth = 'false'"
+      >
+        Log out
+      </button>
+
       <RouterLink to="/cart"
         ><i class="fas fa-shopping-cart"></i>
         <span class="ms-1 text-red-400"> {{ $store.state.cart.length }}</span>
