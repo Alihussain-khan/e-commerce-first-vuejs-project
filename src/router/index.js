@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import Landing from "../views/Landing.vue";
 import Products from "../views/Products.vue";
 import Cart from "../components/Cart.vue";
+import LoginView from "../views/LoginView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,11 @@ const router = createRouter({
       path: "/cart",
       name: "Cart",
       component: Cart,
+    },
+    {
+      path: "/login",
+      name: "LoginView",
+      component: LoginView,
     },
     // {
     //   path: "/singleproduct",
