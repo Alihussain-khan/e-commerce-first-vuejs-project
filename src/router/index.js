@@ -2,9 +2,13 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Landing from "../views/Landing.vue";
 import Products from "../views/Products.vue";
+// import CatogrizedProducts from "@/components/CatogrizedProducts.vue";
 import Cart from "../components/Cart.vue";
 import LoginView from "../views/LoginView.vue";
 import store from "../stores/cart";
+// import CatogrizedProducts from "../views/CatogrizedProducts";
+import SingleProduct from "@/components/SingleProduct.vue";
+import CatogaryView from "../views/CatogaryView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,31 +20,47 @@ const router = createRouter({
       meta: { needsauth: "true" },
     },
     {
-      path: "/about/:id",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue"),
+      path: "/product",
+      name: "SingleProduct",
+      component: SingleProduct,
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue"),
+      path: "/product/:id",
+      name: "SingleProduct",
+      component: SingleProduct,
     },
+
+    // {
+    //   path: "/about/:id",
+    //   name: "about",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (About.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () => import("../views/AboutView.vue"),
+    // },
+    // {
+    //   path: "/about",
+    //   name: "about",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (About.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () => import("../views/AboutView.vue"),
+    // },
     {
       path: "/Landing",
       name: "Landing",
       component: Landing,
     },
-    // {
-    //   path: "/categories",
-    //   name: "categories",
-    //   component: categories,
-    // },
+    {
+      path: "/categories",
+      name: "CatogaryView",
+      component: CatogaryView,
+    },
+    {
+      path: "/categories/:name",
+      name: "CategoryView",
+      component: CatogaryView,
+    },
     {
       path: "/products",
       name: "products",
@@ -75,7 +95,6 @@ const router = createRouter({
 // });
 
 router.beforeEach((to, from, next) => {
-  console.log(store.state.auth);
   if (to.meta.needsauth && store.state.auth === "false") {
     next("/login");
   } else {

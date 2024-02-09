@@ -20,7 +20,7 @@
 <script>
 import { useRoute } from "vue-router";
 export default {
-  name: "sngleproduct",
+  name: "SingleProduct",
   data() {
     return {
       product: "",

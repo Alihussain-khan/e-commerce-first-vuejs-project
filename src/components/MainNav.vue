@@ -2,36 +2,35 @@
   <div class="contain">
     <nav class="space-x-5 flex">
       <RouterLink class="hover:font-semibold" to="/">Home</RouterLink>
-      <RouterLink class="hover:font-semibold" to="/about">About</RouterLink>
-      <RouterLink class="hover:font-semibold" to="/landing">Landing</RouterLink>
+      <!-- <RouterLink class="hover:font-semibold" to="/about">About</RouterLink>
+      <RouterLink class="hover:font-semibold" to="/landing">Landing</RouterLink> -->
       <div class="relative">
-        <RouterLink class="hover:font-semibold" to="/categories"
+        <RouterLink
+          class="hover:font-semibold"
+          to=""
+          @mouseover="mouseover()"
+          @mouseleave="mouseoutlink()"
           >Categories
         </RouterLink>
         <div
           class="absolute bg-gray-700 text-white py-3 shadow-sm"
           id="difgd"
-          @mouseover="
-            {
-              {
-                hover = true;
-              }
-            }
-          "
-          @mouseleave="
-            {
-              {
-                hover = false;
-              }
-            }
-          "
+          @mouseover="mouseover()"
+          @mouseleave="mouseout()"
         >
-          <div v-if="hover">
+          <div
+            class="z-20 absolute bg-blue-950 text-white"
+            v-if="hover === 'true'"
+          >
             <div
               class="hover:bg-slate-100 hover:text-black px-5 cursor-pointer w-56"
               v-for="item in categories"
             >
-              {{ item }}
+              <RouterLink
+                class="hover:font-semibold"
+                :to="'/categories/' + item"
+                >{{ item }}
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -59,19 +58,27 @@ export default {
       .then((res) => res.json())
       .then((e) => {
         this.categories = e;
-        console.log(this.categories);
       });
   },
   methods: {
     mouseover() {
-      let a = document.getElementById("#difgd");
-      a.classList.add("hidden");
-      console.log("mouse in");
+      let dropdownTimeout = setTimeout(() => {
+        this.hover = "true";
+      }, 200);
+      // this.hover = "true";
+      // console.log("mouse in");
     },
     mouseout() {
-      let a = document.querySelector("#di");
-      a.classList.add("hidden");
-      console.log("mouse out");
+      let dropdownTimeout = setTimeout(() => {
+        this.hover = "false";
+      }, 200);
+      // this.hover = "false";
+      // console.log("mouse out");
+    },
+    mouseoutlink() {
+      let dropdownTimeout = setTimeout(() => {
+        this.hover = "false";
+      }, 200);
     },
   },
 };
