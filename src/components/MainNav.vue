@@ -64,6 +64,7 @@ export default {
       });
   },
   methods: {
+    // event emitting
     ok() {
       console.log("works");
       eventbus.emit("paramChange");

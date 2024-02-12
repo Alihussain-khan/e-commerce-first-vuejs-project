@@ -54,10 +54,14 @@ export default {
   },
   mounted() {
     this.apicall();
+
+    //this is the event call that works, on click in the main nav
     // eventbus.on("paramChange", () => {
     //   console.log("getting there");
     //   this.apicall();
     // });
+
+    // not usefull
     // const route = useRoute();
     // this.params = route.params.name;
     // console.log(route.params.name);
