@@ -29,6 +29,7 @@
 
 <script>
 import store from "@/stores/cart.js";
+import router from "@/router";
 export default {
   name: "Login",
   data() {
@@ -43,8 +44,10 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: this.username,
-          password: this.password,
+          username: "atuny0",
+          password: "9uQFF1Lh",
+          // username: this.username,
+          // password: this.password,
           // expiresInMins: 60, // optional
         }),
       })
@@ -56,10 +59,12 @@ export default {
             store.state.auth = "true";
             store.state.token = e.token;
             alert("logged in");
-            window.localStorage.getItem("token");
+            console.log(window.localStorage.getItem("token"));
+            router.push("/");
           } else {
             store.state.auth = "false";
             window.localStorage.removeItem("token");
+            // localStorage.removeItem("token");
           }
         });
     },

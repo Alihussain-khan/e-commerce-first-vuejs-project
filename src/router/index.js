@@ -10,6 +10,7 @@ import store from "../stores/cart";
 import SingleProduct from "@/components/SingleProduct.vue";
 import CatogaryView from "../views/CatogaryView.vue";
 import AddProduct from "@/components/AddProduct.vue";
+import DeleteProduct from "@/components/DeleteProduct.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,13 @@ const router = createRouter({
       path: "/addproduct",
       name: "AddProduct",
       component: AddProduct,
+      meta: { needsauth: "true" },
+    },
+    {
+      path: "/deleteproduct",
+      name: "DeleteProduct",
+      component: DeleteProduct,
+      meta: { needsauth: "true" },
     },
 
     // {
@@ -101,6 +109,12 @@ const router = createRouter({
 // });
 
 router.beforeEach((to, from, next) => {
+  store.state.token = window.localStorage.getItem("token");
+  if (store.state.token) {
+    store.state.auth = "true";
+  } else {
+    store.state.auth = "false";
+  }
   if (to.meta.needsauth && store.state.auth === "false") {
     next("/login");
   } else {

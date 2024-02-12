@@ -4,9 +4,9 @@ export default createStore({
   state: {
     counter: 0,
     cart: [],
-    auth: "true",
-    params: "",
-    token: "",
+    auth: null,
+    params: null,
+    token: null,
   },
   mutations: {
     increment(state, payload) {
