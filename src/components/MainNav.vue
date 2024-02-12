@@ -28,6 +28,7 @@
             >
               <RouterLink
                 class="hover:font-semibold"
+                @click="ok()"
                 :to="'/categories/' + item"
                 >{{ item }}
               </RouterLink>
@@ -45,6 +46,8 @@
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import store from "@/stores/cart.js";
+import eventbus from "../Eventbus/eventbus.js";
 export default {
   name: "MainNav",
   data() {
@@ -61,6 +64,10 @@ export default {
       });
   },
   methods: {
+    ok() {
+      console.log("works");
+      eventbus.emit("paramChange");
+    },
     mouseover() {
       let dropdownTimeout = setTimeout(() => {
         this.hover = "true";

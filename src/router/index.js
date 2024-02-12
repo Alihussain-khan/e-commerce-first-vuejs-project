@@ -9,6 +9,7 @@ import store from "../stores/cart";
 // import CatogrizedProducts from "../views/CatogrizedProducts";
 import SingleProduct from "@/components/SingleProduct.vue";
 import CatogaryView from "../views/CatogaryView.vue";
+import AddProduct from "@/components/AddProduct.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: "/product/:id",
       name: "SingleProduct",
       component: SingleProduct,
+    },
+    {
+      path: "/addproduct",
+      name: "AddProduct",
+      component: AddProduct,
     },
 
     // {

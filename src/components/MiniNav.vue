@@ -5,8 +5,8 @@
       <RouterLink v-if="$store.state.auth === 'false'" to="/login"
         >Login</RouterLink
       >
-      <RouterLink v-if="$store.state.auth === 'true'" to="/login"
-        >Add Products</RouterLink
+      <RouterLink v-if="$store.state.auth === 'true'" to="/addproduct"
+        >Add Product</RouterLink
       >
       <RouterLink v-if="$store.state.auth === 'true'" to="/login"
         >Delete Products</RouterLink
@@ -28,8 +28,15 @@
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import store from "@/stores/cart.js";
 export default {
   name: "MiniNav",
+  methods: {
+    logout() {
+      store.state.auth = "false";
+      store.state.token = "";
+    },
+  },
 };
 </script>
 

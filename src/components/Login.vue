@@ -1,13 +1,13 @@
 <template>
   <div class="flex justify-center my-20">
-    <div class="py-20 px-12 bg-slate-400 rounded-lg">
+    <div class="py-20 px-12 bg-slate-300 rounded-lg">
       <input
         class="border mb-2 h-10 px-3 rounded w-56"
         type="text"
-        name="email"
-        id="email"
-        placeholder="Email"
-        v-model="email"
+        name="text"
+        id="username"
+        placeholder="username"
+        v-model="username"
       /><br />
       <input
         class="border mb-2 h-10 px-3 rounded w-56"
@@ -28,17 +28,40 @@
 </template>
 
 <script>
+import store from "@/stores/cart.js";
 export default {
   name: "Login",
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
     };
   },
   methods: {
     submit() {
-      console.log(this.email + " " + this.password);
+      fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+          // expiresInMins: 60, // optional
+        }),
+      })
+        .then((res) => res.json())
+        .then((e) => {
+          console.log(e);
+          if (e.id) {
+            window.localStorage.setItem("token", e.token);
+            store.state.auth = "true";
+            store.state.token = e.token;
+            alert("logged in");
+            window.localStorage.getItem("token");
+          } else {
+            store.state.auth = "false";
+            window.localStorage.removeItem("token");
+          }
+        });
     },
   },
 };

@@ -1,5 +1,8 @@
 <template>
-  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 my-10 mx-10">
+  <div
+    class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 my-10 mx-10"
+    :key="$store.state.params"
+  >
     <div v-for="item in product" class="mb-10 bg-gray-100 rounded shadow">
       <div class="mx-5">
         <RouterLink :to="'/product/' + item.id">
@@ -38,17 +41,23 @@
 
 <script>
 import { useRoute } from "vue-router";
+import store from "@/stores/cart.js";
+import eventbus from "../Eventbus/eventbus.js";
+
 export default {
   name: "CatogrizedProducts",
+
   data() {
     return {
       product: "",
-      params: "",
-      route: useRoute(),
     };
   },
   mounted() {
     this.apicall();
+    // eventbus.on("paramChange", () => {
+    //   console.log("getting there");
+    //   this.apicall();
+    // });
     // const route = useRoute();
     // this.params = route.params.name;
     // console.log(route.params.name);
@@ -58,19 +67,20 @@ export default {
     //     this.product = e.products;
     //   });
   },
-  watch: {},
   methods: {
     apicall() {
       const route = useRoute();
-      this.params = route.params.name;
-      console.log(route.params.name);
-      fetch("https://dummyjson.com/products/category/" + this.params)
+      this.product = route.params.name;
+      store.state.params = route.params.name;
+      console.log(store.state.params);
+      fetch("https://dummyjson.com/products/category/" + route.params.name)
         .then((res) => res.json())
         .then((e) => {
           this.product = e.products;
         });
     },
   },
+  watch: {},
 };
 </script>
 
