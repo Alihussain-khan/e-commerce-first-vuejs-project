@@ -67,7 +67,7 @@ export default {
     // event emitting
     ok() {
       console.log("works");
-      eventbus.emit("paramChange");
+      this.$emit("paramChange");
     },
     mouseover() {
       let dropdownTimeout = setTimeout(() => {

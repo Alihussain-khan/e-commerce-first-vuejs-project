@@ -19,18 +19,31 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-center">
-      <button
-        class="text-center bg-blue-950 text-white w-1/3 rounded py-1 my-5 hover:bg-blue-900"
-      >
-        Checkout
-      </button>
+    <div v-if="$store.state.cart.length" class="text-center">
+      <RouterLink to="/"
+        ><button
+          class="text-center bg-blue-950 text-white w-1/3 rounded py-1 my-5 hover:bg-blue-900"
+        >
+          Checkout
+        </button>
+      </RouterLink>
     </div>
   </div>
-  <div v-else><h1>empty cart</h1></div>
+  <div v-if="!$store.state.cart.length" class="text-center">
+    <h1 class="text-3xl font-bold my-10">empty cart</h1>
+    <RouterLink to="/products"
+      ><button
+        class="text-center bg-blue-950 text-white w-1/3 rounded py-1 my-5 hover:bg-blue-900"
+      >
+        Browse Products
+      </button></RouterLink
+    >
+  </div>
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
+
 export default {
   name: "Cart",
   data() {
@@ -38,6 +51,7 @@ export default {
       proli: "",
     };
   },
+  components: { RouterLink },
 };
 </script>
 

@@ -16,7 +16,7 @@
 
           <h1 class="font-semibold texthead">{{ item.title }}</h1>
           <div class="flexbetween">
-            <span class="font-bold text-blue-900">{{ item.price }}$</span>
+            <span class="font-bold text-blue-900 me-4">{{ item.price }}$</span>
             <span class="font-bold text-yellow-600">☆ {{ item.rating }}</span>
           </div>
           <h1 class="text">{{ item.description }}</h1>
@@ -41,43 +41,25 @@
 
 <script>
 import { useRoute } from "vue-router";
-import store from "@/stores/cart.js";
-import eventbus from "../Eventbus/eventbus.js";
-
 export default {
   name: "CatogrizedProducts",
 
   data() {
     return {
       product: "",
+      category: "",
     };
   },
   mounted() {
     this.apicall();
-
-    //this is the event call that works, on click in the main nav
-    // eventbus.on("paramChange", () => {
-    //   console.log("getting there");
-    //   this.apicall();
-    // });
-
-    // not usefull
-    // const route = useRoute();
-    // this.params = route.params.name;
-    // console.log(route.params.name);
-    // fetch("https://dummyjson.com/products/category/" + this.params)
-    //   .then((res) => res.json())
-    //   .then((e) => {
-    //     this.product = e.products;
-    //   });
   },
   methods: {
     apicall() {
       const route = useRoute();
-      this.product = route.params.name;
-      store.state.params = route.params.name;
-      console.log(store.state.params);
-      fetch("https://dummyjson.com/products/category/" + route.params.name)
+      this.category = route.params.name;
+      console.log(this.product);
+      // Fetch data based on the route parameters
+      fetch("https://dummyjson.com/products/category/" + this.category)
         .then((res) => res.json())
         .then((e) => {
           this.product = e.products;
@@ -85,6 +67,9 @@ export default {
     },
   },
   watch: {},
+  created() {},
+  updated() {},
+  setup() {},
 };
 </script>
 
